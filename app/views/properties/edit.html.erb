@@ -1,0 +1,11 @@
+<h3>Edit Form</h3>
+
+<%= form_for(@property) do |f| %>
+  <label>Address:</label><br>
+  <%= f.text_field :address %><br>
+
+  <label>Price:</label><br>
+  <%= f.text_field :price %><br>
+
+  <%= f.submit %>
+<% end %>
