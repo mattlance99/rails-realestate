@@ -1,6 +1,7 @@
 class PropertiesController < ApplicationController
 
   def new
+    @property = Property.new
   end
 
   def index
@@ -11,6 +12,15 @@ class PropertiesController < ApplicationController
     @property = Property.find(params[:id])
   end
 
+  def create
+    @property = Property.new(property_params)
+    if @property.save
+      redirect_to @property
+    else
+      render :new
+    end
+  end
+
   def edit
     @property = Property.find(params[:id])
   end
@@ -19,5 +29,9 @@ class PropertiesController < ApplicationController
     @property = Property.find(params[:id])
     @property.update(address: params[:address], price: params[:price], bedrooms: params[:bedrooms], bedrooms: params[:bathrooms] )
     redirect_to property_path(@property)
+  end
+
+  def property_params
+    params.require(:property).permit(:address, :price, :bedrooms, :bathrooms)
   end
 end
