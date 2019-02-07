@@ -4,11 +4,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    return redirect_to(controller: 'sessions',
-                       action: 'new') if !params[:name] || params[:name].empty?
-    session[:name] = params[:name]
-    redirect_to controller: 'application', action: 'hello'
-  end
+      @agent = Agent.find_by(username: params[:username])
+      return head(:forbidden) unless @agent.authenticate(params[:password])
+      session[:user_id] = @agent.id
+    end
 
   def destroy
     session.delete :name

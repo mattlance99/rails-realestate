@@ -33,5 +33,6 @@ class PropertiesController < ApplicationController
 
   def property_params
     params.require(:property).permit(:address, :price, :bedrooms, :bathrooms)
+    binding.pry
   end
 end
