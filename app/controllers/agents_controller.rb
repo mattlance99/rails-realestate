@@ -1,17 +1,18 @@
 class AgentsController < ApplicationController
 
   def new
-    @agent = Agent.new
   end
 
   def create
-    Agent.create(agent_params)
-    redirect_to agents_path
+    @agent = Agent.create(agent_params)
+    return redirect_to controller: 'agents', action: 'new' unless @agent.save
+    session[:user_id] = @agent.id
+    redirect_to controller: 'welcome', action: 'home'
   end
 
   private
 
   def agent_params
-    params.require(:agent).permit(:username, :password, :password_confirmation)
+    params.require(:agent).permit(:email, :password, :password_confirmation)
   end
 end

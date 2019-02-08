@@ -4,14 +4,16 @@ class SessionsController < ApplicationController
   end
 
   def create
-      @agent = Agent.find_by(username: params[:username])
-      return head(:forbidden) unless @agent.authenticate(params[:password])
-      session[:user_id] = @agent.id
-    end
-
-  def destroy
-    session.delete :name
-    redirect_to controller: 'application', action: 'hello'
+    agent = Agent.find_by(email: params[:agent][:email])
+    agent = agent.try(:authenticate, params[:agent][:password])
+    return redirect_to(controller: 'sessions', action: 'new') unless agent
+    session[:user_id] = agent.id
+    @agent= agent
+    redirect_to controller: 'welcome', action: 'home'
   end
 
+  def destroy
+    session.delete :user_id
+    redirect_to '/'
+  end
 end
