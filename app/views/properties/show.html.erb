@@ -1,2 +1,8 @@
 
-<%=@property.address%>
+<h1><%= link_to @property.address %></h1>
+
+<h3>Price: <%=@property.price %></h3>
+<h3>Bedrooms: <%=@property.bedrooms %></h3>
+<h3>Bathrooms: <%=@property.bathrooms %></h3> 
+
+<%= link_to "All Properties", properties_path %>

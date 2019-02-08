@@ -1,6 +1,7 @@
 
-<h2>List of all Properties</h2>
-
-<%@properties.each do |property|%>
-    <%=property.address%>
-    <%end%>
+<h1>Your Properties</h1>
+  <ul>
+    <% @properties.each do |property| %>
+        <li><%= link_to property.address%></li>
+    <% end %>
+  </ul>
