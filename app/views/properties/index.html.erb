@@ -2,6 +2,6 @@
 <h1>Your Properties</h1>
   <ul>
     <% @properties.each do |property| %>
-        <li><%= link_to property.address%></li>
+        <li><%= link_to property.address, property_path(property)%></li>
     <% end %>
   </ul>
