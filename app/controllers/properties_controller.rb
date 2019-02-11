@@ -1,19 +1,38 @@
 class PropertiesController < ApplicationController
 
   def new
-    @property = Property.new
+    if params[:agent_id] && !Agent.exists?(params[:agent_id])
+      redirect_to agent_path, alert: "Author not found."
+    else
+      @property = Property.new(agent_id: params[:agent_id])
+    end
   end
 
   def index
-    @properties = Property.all
+    if params[:agent_id]
+      @properties = Agent.find(params[:agent_id]).properties
+    else
+      @properties = Property.all
+    end
   end
 
   def show
-    @property = Property.find(params[:id])
+    if params[:agent_id]
+      @property = Agent.find(params[:agent_id]).properties.find(params[:id])
+    else
+      @property = Property.find(params[:id])
+    end
   end
 
   def create
-    @property = Property.new(property_params)
+    raise params.inspect
+    @property = Property.new
+
+    @property.address = (params[:address])
+    binding.pry
+    @property.price = (params[:price])
+    @property.bedrooms= (params[:bedrooms])
+    @property.bathrooms = (params[:bathrooms])
     if @property.save
       redirect_to property_path(@property)
     else
@@ -37,7 +56,7 @@ class PropertiesController < ApplicationController
   end
 
 
-  def property_params
-    params.require(:property).permit(:address, :price, :bedrooms, :bathrooms)
-  end
+  #def property_params
+    #params.require(:property).permit(:address, :price, :bedrooms, :bathrooms)
+  #end
 end

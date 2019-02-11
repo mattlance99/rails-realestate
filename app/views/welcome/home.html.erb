@@ -1,4 +1,8 @@
 <h1>Hi, <%= @agent.email %></h1>
+
+<br>
+
+<%=link_to 'Your Properties', properties_path(@agent)%>
 <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
   <input type=submit value='logout'>
 <% end %>
