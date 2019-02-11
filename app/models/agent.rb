@@ -12,3 +12,7 @@ class Agent < ApplicationRecord
     end
   end
 end
+
+
+      #u.email = auth['info']['email']
+      #u.image = auth['info']['image']
