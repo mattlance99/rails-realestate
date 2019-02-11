@@ -25,19 +25,9 @@ class PropertiesController < ApplicationController
   end
 
   def create
-    raise params.inspect
-    @property = Property.new
-
-    @property.address = (params[:address])
-    binding.pry
-    @property.price = (params[:price])
-    @property.bedrooms= (params[:bedrooms])
-    @property.bathrooms = (params[:bathrooms])
-    if @property.save
-      redirect_to property_path(@property)
-    else
-      render :new
-    end
+    @property = Property.new(property_params)
+    @property.save
+    redirect_to property_path(@property)
   end
 
   def edit
@@ -56,7 +46,7 @@ class PropertiesController < ApplicationController
   end
 
 
-  #def property_params
-    #params.require(:property).permit(:address, :price, :bedrooms, :bathrooms)
-  #end
+  def property_params
+    params.require(:property).permit(:address, :price, :bedrooms, :bathrooms, :agent_id)
+  end
 end
