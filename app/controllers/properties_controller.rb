@@ -2,7 +2,7 @@ class PropertiesController < ApplicationController
 
   def new
     if params[:agent_id] && !Agent.exists?(params[:agent_id])
-      redirect_to agent_path, alert: "Author not found."
+      redirect_to agent_path, alert: "Agent not found."
     else
       @property = Property.new(agent_id: params[:agent_id])
     end
@@ -31,7 +31,17 @@ class PropertiesController < ApplicationController
   end
 
   def edit
-    @property = Property.find(params[:id])
+    if params[:agent_id]
+      agent = Agent.find_by(id: params[:agent_id])
+      if author.nil?
+        #redirect to edit page ? alert: "Agent not found."
+      else
+        @property = agents.posts.find_by(id: params[:id])
+        #redirect to edit page ? alert: "Agent not found." if @post.nil?
+      end
+    else
+      @property = Property.find(params[:id])
+    end
   end
 
   def update

@@ -1,17 +1,3 @@
-<h3>Edit Form</h3>
+<h3>Edit a Property</h3>
 
-<%= form_for(@property) do |f| %>
-  <label>Address:</label><br>
-  <%= f.text_field :address %><br>
-
-  <label>Price:</label><br>
-  <%= f.text_field :price %><br>
-
-  <label>Bedrooms:</label><br>
-  <%= f.text_field :bedrooms %><br>
-
-  <label>Bathrooms:</label><br>
-  <%= f.text_field :bathrooms %><br>
-
-  <%= f.submit %>
-<% end %>
+<%= render partial: 'form' %>

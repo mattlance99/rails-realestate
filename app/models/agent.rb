@@ -6,6 +6,9 @@ class Agent < ApplicationRecord
   validates :email, presence: true
   validates :email, uniqueness: true
 
-  #def self.find_or_create by omniauth(auth_hash)
-  
+  def self.find_or_create_by_omniauth(auth_hash)
+    self.where(:email => auth_hash["info"]["email"]).first_or_create do |agent|
+      agent.password = SecureRandom.hex
+    end
+  end
 end

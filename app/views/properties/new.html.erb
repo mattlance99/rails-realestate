@@ -1,18 +1,2 @@
 
-<h1>Add a Property</h1>
-
-<%= form_for @property  do |f| %>
-  <%= f.label :address %>
-  <%= f.text_field :address %>
-  <br />
-  <%= f.label :price %>
-  <%= f.text_field :price %>
-  <br />
-  <%= f.label :bedrooms %>
-  <%= f.text_field :bedrooms %>
-  <br />
-  <%= f.label :bathrooms %>
-  <%= f.text_field :bathrooms %>
-  <br />
-  <%= f.submit %>
-<% end %>
+<%= render partial: 'form' %>

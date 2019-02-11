@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if auth_hash = request.env["omniauth.auth"]
       agent = Agent.find_or_create_by_omniauth(auth_hash)
       session[:user_id] = agent.id
-      redirect_to controller: 'welcome', action: 'home'
+      redirect_to controller: 'properties', action: 'index'
     else
       agent = Agent.find_by(email: params[:agent][:email])
       agent = agent.try(:authenticate, params[:agent][:password])
