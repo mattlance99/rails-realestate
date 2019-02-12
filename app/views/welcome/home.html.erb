@@ -2,7 +2,14 @@
 
 <br>
 
-<%=link_to 'Your Properties', properties_path(@agent)%>
+<h3>What would you like to do?</h3>
+
+<%=link_to 'See Your Properties', properties_path(@agent)%>
+<br>
+<br>
+<%=link_to 'See Clients', clients_path(@client)%>
+<br>
+<br>
 <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
   <input type=submit value='logout'>
 <% end %>
