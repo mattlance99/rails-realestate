@@ -25,7 +25,9 @@ class PropertiesController < ApplicationController
   end
 
   def create
-    @property = Property.new(property_params)
+    agent = Agent.find_by(id: session[:user_id])
+    @property = agent.properties.build(property_params)
+    #@property = Property.new(property_params)
     @property.save
     redirect_to property_path(@property)
   end
