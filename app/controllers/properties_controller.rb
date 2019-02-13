@@ -16,6 +16,7 @@ class PropertiesController < ApplicationController
     #end
 #  end
   def index
+    @properties = Agent.find(session[:user_id]).properties
     if params[:date] == "This Week"
       @properties = Property.from_this_week
     elsif params[:date] == "This Month"
