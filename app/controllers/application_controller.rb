@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-  before_action :current_user
+  before_action :require_logged_in
 
     def current_user
       @agent = (Agent.find_by(id: session[:user_id]) || Agent.new)

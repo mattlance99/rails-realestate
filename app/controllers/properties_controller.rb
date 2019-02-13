@@ -16,13 +16,12 @@ class PropertiesController < ApplicationController
     #end
 #  end
   def index
+    binding.pry
     @properties = Agent.find(session[:user_id]).properties
     if params[:date] == "This Week"
-      @properties = Property.from_this_week
+      @properties  = @properties.from_this_week
     elsif params[:date] == "This Month"
-      @properties = Property.from_this_month
-    else
-      @properties = Property.all
+      @properties  = @properties.from_this_month
     end
   end
 

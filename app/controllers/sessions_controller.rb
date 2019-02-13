@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
+skip_before_action :require_logged_in, :except => :destroy
 
   def new
+    @agent = Agent.new
   end
 
   def create
