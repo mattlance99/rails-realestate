@@ -8,9 +8,18 @@ class PropertiesController < ApplicationController
     end
   end
 
+  #def index
+    #if params[:agent_id]
+      #@properties = Agent.find(params[:agent_id]).properties
+    #else
+      #@properties = Property.all
+    #end
+#  end
   def index
-    if params[:agent_id]
-      @properties = Agent.find(params[:agent_id]).properties
+    if params[:date] == "This Week"
+      @properties = Property.from_this_week
+    elsif params[:date] == "This Month"
+      @properties = Property.from_this_month
     else
       @properties = Property.all
     end
@@ -60,7 +69,7 @@ class PropertiesController < ApplicationController
   end
 
   private
-  
+
   def property_params
     params.require(:property).permit(:address, :price, :bedrooms, :bathrooms, :agent_id)
   end

@@ -1,5 +1,12 @@
-
 <h1>Your Properties</h1>
+
+<div>
+  <h3>Listings:</h3>
+  <%= form_tag("/properties", method: "get") do %>
+    <%= select_tag "date", options_for_select(["This Week", "This Month"]), include_blank: true %>
+    <%= submit_tag "Filter" %>
+  <% end %>
+</div>
   <ul>
     <% @properties.each do |property| %>
         <li><%= link_to property.address, property_path(property)%></li>
