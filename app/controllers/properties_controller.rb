@@ -25,7 +25,6 @@ class PropertiesController < ApplicationController
   end
 
   def create
-
     agent = Agent.find_by(id: session[:user_id])
     @property = agent.properties.build(property_params)
     if @property.save
@@ -38,7 +37,7 @@ class PropertiesController < ApplicationController
   def edit
     if params[:agent_id]
       agent = Agent.find_by(id: params[:agent_id])
-      if author.nil?
+      if agent.nil?
         #redirect to edit page ? alert: "Agent not found."
       else
         @property = agents.posts.find_by(id: params[:id])
@@ -60,7 +59,8 @@ class PropertiesController < ApplicationController
     redirect_to properties_url
   end
 
-
+  private
+  
   def property_params
     params.require(:property).permit(:address, :price, :bedrooms, :bathrooms, :agent_id)
   end

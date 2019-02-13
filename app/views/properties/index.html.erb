@@ -3,6 +3,7 @@
   <ul>
     <% @properties.each do |property| %>
         <li><%= link_to property.address, property_path(property)%></li>
+              <%= property.property_details %><br>
           <%= link_to "Delete", property, method: :delete, data: { confirm: "Really?" } %>
           <br><br>
     <% end %>

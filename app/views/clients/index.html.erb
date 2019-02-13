@@ -6,20 +6,16 @@
         <br>
         <%client.properties.each do |property| %>
 
-        <%= link_to property.address, property_path(property) %>
+        <%= link_to property.property_details, property_path(property) %>
         <br>
-        <%end%>
-
-
-          <br><br>
+          <%end%>
+          <br>
     <% end %>
 
-
-
   </ul>
-<%= link_to "Add a Client", new_property_path %>
-<br>
-<br>
+
+    <%= link_to "Add a Client", new_client_path %>    <br><br>
+
     <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
       <input type=submit value='logout'>
     <% end %>
