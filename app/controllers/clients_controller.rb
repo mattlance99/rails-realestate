@@ -17,17 +17,28 @@ class ClientsController < ApplicationController
   end
 
   def create
-    agent = Agent.find_by(id: session[:user_id])
-    @client = agent.client.build(client_params)
-    if @property.save
+    @client = Client.new(client_params)
+    if @client.save
       redirect_to client_path(@client)
     else
       render :new
     end
   end
 
+  def edit
+    @client = Client.find(params[:id])
+  end
+
+  def update
+    @client = Client.find(params[:id])
+    @client.update(client_params)
+    redirect_to client_path(@client)
+  end
+
+
+  private
 
   def client_params
-    params.require(:client).permit(:last_name, :first_name, :phone_number, :agent_id)
+    params.require(:client).permit(:last_name, :first_name, :phone_number)
   end
 end
