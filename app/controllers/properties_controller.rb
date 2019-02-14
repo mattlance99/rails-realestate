@@ -8,15 +8,7 @@ class PropertiesController < ApplicationController
     end
   end
 
-  #def index
-    #if params[:agent_id]
-      #@properties = Agent.find(params[:agent_id]).properties
-    #else
-      #@properties = Property.all
-    #end
-#  end
   def index
-    binding.pry
     @properties = Agent.find(session[:user_id]).properties
     if params[:date] == "This Week"
       @properties  = @properties.from_this_week
