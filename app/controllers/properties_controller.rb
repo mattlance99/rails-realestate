@@ -18,11 +18,21 @@ class PropertiesController < ApplicationController
   end
 
   def show
-    if params[:agent_id]
-      @property = Agent.find(params[:agent_id]).properties.find(params[:id])
-    else
-      @property = Property.find(params[:id])
-    end
+      if params[:agent_id]
+        property = Agent.find(params[:agent_id]).properties.find(params[:id])
+          if session[:user_id] == property.agent_id
+            @property = property
+          else
+            redirect_to(controller: 'properties', action: 'index')
+          end
+      else
+        property = Property.find(params[:id])
+          if session[:user_id] == property.agent_id
+            @property = property
+          else
+            redirect_to(controller: 'properties', action: 'index')
+          end
+      end
   end
 
   def create
