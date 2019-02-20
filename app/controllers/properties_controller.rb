@@ -20,6 +20,7 @@ class PropertiesController < ApplicationController
   def show
       if params[:agent_id]
         property = Agent.find(params[:agent_id]).properties.find(params[:id])
+        property = Property.find(params[:id])
           if session[:user_id] == property.agent_id
             @property = property
           else
