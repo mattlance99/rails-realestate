@@ -7,10 +7,13 @@ skip_before_action :require_logged_in
   end
 
   def create
-    @agent = Agent.create(agent_params)
-    return redirect_to controller: 'agents', action: 'new' unless @agent.save
-    session[:user_id] = @agent.id
-    redirect_to controller: 'welcome', action: 'home'
+    @agent = Agent.new(agent_params)
+    if @agent.save
+      session[:user_id] = @agent.id
+      redirect_to controller: 'welcome', action: 'home'
+    else
+      render :new
+    end
   end
 
   private

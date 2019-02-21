@@ -40,7 +40,6 @@ class PropertiesController < ApplicationController
     agent = Agent.find_by(id: session[:user_id])
     @property = agent.properties.build(property_params)
     if @property.save
-      binding.pry
       redirect_to property_path(@property)
     else
       render :new
