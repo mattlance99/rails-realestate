@@ -1,4 +1,6 @@
 class PropertiesController < ApplicationController
+before_action :set_property, only: [:show, :edit, :update]
+before_action :authorize_user!, only: [:show, :edit, :update, :destroy]
 
   def new
     if params[:agent_id] && !Agent.exists?(params[:agent_id])
@@ -18,22 +20,7 @@ class PropertiesController < ApplicationController
   end
 
   def show
-      if params[:agent_id]
-        property = Agent.find(params[:agent_id]).properties.find(params[:id])
-        property = Property.find(params[:id])
-          if session[:user_id] == property.agent_id
-            @property = property
-          else
-            redirect_to(controller: 'properties', action: 'index')
-          end
-      else
-        property = Property.find(params[:id])
-          if session[:user_id] == property.agent_id
-            @property = property
-          else
-            redirect_to(controller: 'properties', action: 'index')
-          end
-      end
+
   end
 
   def create
@@ -48,26 +35,17 @@ class PropertiesController < ApplicationController
 
   def edit
     if params[:agent_id]
-      agent = Agent.find_by(id: params[:agent_id])
-      if agent.nil?
-        #redirect to edit page ? alert: "Agent not found."
-      else
-        @property = agents.posts.find_by(id: params[:id])
-        #redirect to edit page ? alert: "Agent not found." if @post.nil?
-      end
-    else
-      @property = Property.find(params[:id])
+      @agent = Agent.find_by(id: params[:agent_id])
     end
   end
 
   def update
-    @property = Property.find(params[:id])
     @property.update(property_params)
     redirect_to property_path(@property)
   end
 
   def destroy
-    Property.find(params[:id]).destroy
+    @property.destroy
     redirect_to properties_url
   end
 
@@ -75,5 +53,18 @@ class PropertiesController < ApplicationController
 
   def property_params
     params.require(:property).permit(:address, :price, :bedrooms, :bathrooms, :agent_id)
+  end
+
+  def authorize_user!
+    if session[:user_id] != @property.agent_id
+      redirect_to(controller: 'properties', action: 'index')
+    end
+  end
+
+  def set_property
+    @property = Property.find_by_id(params[:id])
+    if @property.nil?
+      redirect_to(controller: 'properties', action: 'index')
+    end
   end
 end
