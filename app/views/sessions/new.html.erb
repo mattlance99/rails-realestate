@@ -1,18 +1,15 @@
 <h2>Welcome to the Home of Jersey Shore Real Estate</h2>
 <br>
 <h3>Please login or sign up to continue</h3>
-
-<% if @agent.errors.any? %>
+<% if @errors %>
   <div id="error_explanation">
     <h2>
-      <%= pluralize(@agent.errors.count, "error") %>
-      prohibited this agent from logging in.
+      One error prohibited this Agent from logging in.
     </h2>
 
     <ul>
-    <% @agent.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
+      <li><%= @errors %></li>
+
     </ul>
   </div>
 <% end %>

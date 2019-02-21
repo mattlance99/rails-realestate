@@ -12,12 +12,19 @@ skip_before_action :require_logged_in, :except => :destroy
       @agent = agent
       redirect_to controller: 'welcome', action: 'home'
     else
-      agent = Agent.find_by(email: params[:agent][:email])
-      agent = agent.try(:authenticate, params[:agent][:password])
-      return redirect_to(controller: 'sessions', action: 'new') unless agent
-      session[:user_id] = agent.id
-      @agent = agent
-      redirect_to controller: 'welcome', action: 'home'
+      @agent = Agent.find_by(email: params[:agent][:email])
+      if @agent.try(:authenticate, params[:agent][:password])
+        session[:user_id] = @agent.id
+        redirect_to controller: 'welcome', action: 'home'
+      else
+        @errors = 'Email or password doesn\'t match'
+        render :new
+      end
+
+      #return redirect_to(controller: 'sessions', action: 'new') unless agent
+      #session[:user_id] = agent.id
+      #@agent = agent
+      #redirect_to controller: 'welcome', action: 'home'
     end
   end
 
@@ -25,4 +32,5 @@ skip_before_action :require_logged_in, :except => :destroy
     session.delete :user_id
     redirect_to '/'
   end
+
 end
