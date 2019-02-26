@@ -20,11 +20,6 @@ skip_before_action :require_logged_in, :except => :destroy
         @errors = 'Email or password doesn\'t match'
         render :new
       end
-
-      #return redirect_to(controller: 'sessions', action: 'new') unless agent
-      #session[:user_id] = agent.id
-      #@agent = agent
-      #redirect_to controller: 'welcome', action: 'home'
     end
   end
 

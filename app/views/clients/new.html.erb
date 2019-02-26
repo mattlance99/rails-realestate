@@ -1,3 +1,28 @@
 <h2>Add a Client</h2>
 
-<%= render partial: 'form' %>
+<%= form_for @client  do |f| %>
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name %>
+  <br />
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %>
+  <br />
+  <%= f.label :phone_number %>
+  <%= f.text_field :phone_number %>
+  <br />
+  <%= f.fields_for :properties do |addr| %>
+    <%= addr.hidden_field :agent_id, value:@agent.id %>
+    <%= addr.label :address %>
+    <%= addr.text_field :address %><br>
+
+    <%= addr.label :price %>
+    <%= addr.text_field :price %><br>
+
+    <%= addr.label :bedrooms %>
+    <%= addr.text_field :bedrooms %><br>
+
+    <%= addr.label :bathrooms %>
+    <%= addr.text_field :bathrooms %><br>
+  <% end %>
+  <%= f.submit %>
+<% end %>

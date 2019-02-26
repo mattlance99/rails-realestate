@@ -2,6 +2,8 @@ class ClientsController < ApplicationController
 
   def new
     @client = Client.new
+    @client.properties.build
+    @agent = current_user
   end
 
   def index
@@ -18,7 +20,9 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new(client_params)
+    binding.pry
     if @client.save
+
       redirect_to client_path(@client)
     else
       render :new
@@ -39,6 +43,6 @@ class ClientsController < ApplicationController
   private
 
   def client_params
-    params.require(:client).permit(:last_name, :first_name, :phone_number)
+    params.require(:client).permit(:last_name, :first_name, :phone_number, properties_attributes:[:address, :price, :bedrooms, :bathrooms, :agent_id])
   end
 end
