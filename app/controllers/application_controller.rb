@@ -7,7 +7,9 @@ class ApplicationController < ActionController::Base
     end
 
     def logged_in?
-      current_user.id != nil
+      if session[:user_id]
+        current_user.id != nil
+      end
     end
 
     def require_logged_in

@@ -25,7 +25,6 @@ before_action :authorize_user!, only: [:show, :edit, :update, :destroy]
   def create
     agent = Agent.find_by(id: session[:user_id])
     @property = agent.properties.build(property_params)
-    binding.pry
     if @property.save
       redirect_to property_path(@property)
     else
