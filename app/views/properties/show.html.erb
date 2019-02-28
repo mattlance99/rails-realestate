@@ -5,9 +5,6 @@
 <h3>Bedrooms: <%=@property.bedrooms %></h3>
 <h3>Bathrooms: <%=@property.bathrooms %></h3>
 <h3>Client: <%= link_to @property.client.last_name_first_name, client_path(@property.client) %></h3>
-<%#<h3>Client: <%=link_to , edit_property_path %>
-  <%#last_name_first_name
-
 <%= link_to "Edit Property", edit_property_path %>
 <br>
 <br>
