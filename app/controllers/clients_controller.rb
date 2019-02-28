@@ -6,18 +6,8 @@ class ClientsController < ApplicationController
     @agent = current_user
   end
 
-  #def index
-    #if params[:agent_id]
-      #@clients = Agent.find(params[:agent_id]).agent
-    #else
-    #  @clients = Client.all
-    #end
-#  en
-
   def index
     @agent = Agent.find(session[:user_id])
-    #@clients = Agent.find(session[:user_id])
-    #@clients = Client.all
     @clients = @agent.clients
   end
 
