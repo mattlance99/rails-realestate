@@ -6,12 +6,19 @@ class ClientsController < ApplicationController
     @agent = current_user
   end
 
+  #def index
+    #if params[:agent_id]
+      #@clients = Agent.find(params[:agent_id]).agent
+    #else
+    #  @clients = Client.all
+    #end
+#  en
+
   def index
-    if params[:agent_id]
-      @clients = Agent.find(params[:agent_id]).agent
-    else
-      @clients = Client.all
-    end
+    @agent = Agent.find(session[:user_id])
+    #@clients = Agent.find(session[:user_id])
+    #@clients = Client.all
+    @clients = @agent.clients
   end
 
   def show
@@ -20,7 +27,6 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new(client_params)
-    binding.pry
     if @client.save
 
       redirect_to client_path(@client)
