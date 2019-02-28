@@ -17,6 +17,9 @@
 <%= link_to "Add a Property", new_property_path %>
 <br>
 <br>
+<%=link_to 'See Clients', clients_path(@client)%>
+<br>
+<br>
     <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
       <input type=submit value='logout'>
     <% end %>
