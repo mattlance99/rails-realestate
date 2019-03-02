@@ -1,6 +1,7 @@
 class PropertiesController < ApplicationController
 before_action :set_property, only: [:show, :edit, :update]
-before_action :authorize_user!, only: [:show, :edit, :update, :destroy]
+
+before_action :authorize_user!, only: [:show, :edit, :update]
 
   def new
     if params[:agent_id] && !Agent.exists?(params[:agent_id])
@@ -44,6 +45,7 @@ before_action :authorize_user!, only: [:show, :edit, :update, :destroy]
   end
 
   def destroy
+    @property = Property.find(params[:id])
     @property.destroy
     redirect_to properties_url
   end
