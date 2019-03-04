@@ -53,7 +53,7 @@ before_action :authorize_user!, only: [:show, :edit, :update]
   private
 
   def property_params
-    params.require(:property).permit(:address, :price, :bedrooms, :bathrooms, :agent_id)
+    params.require(:property).permit(:address, :price, :bedrooms, :bathrooms, :agent_id, :client_id)
   end
 
   def authorize_user!

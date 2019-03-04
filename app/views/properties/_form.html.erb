@@ -26,5 +26,6 @@
   <%= f.label :bathrooms %>
   <%= f.text_field :bathrooms %>
   <br>
+  <%= f.collection_select :client_id, Client.all, :id, :last_name %>
   <%= f.submit %>
 <% end %>
