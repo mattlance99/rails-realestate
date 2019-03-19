@@ -18,7 +18,13 @@ before_action :authorize_user!, only: [:show, :edit, :update]
     elsif params[:date] == "This Month"
       @properties  = @properties.from_this_month
     end
+    respond_to do |format|
+       format.html
+       format.json {render json: @properties}
+     end
   end
+
+
 
   def show
   end
