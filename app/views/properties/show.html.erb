@@ -1,11 +1,31 @@
 
-<h1><%= @property.address %></h1>
+<a href="#" class="js-next" data-id="<%=@property.id%>">Next...</a>
+<h1 Address: class="propertyAddress"><%= @property.address %></h1>
+<h3>Price:</h3><p class="propertyPrice"><%= @property.price %></p>
+<h3>Bedrooms:</h3><p class="propertyBedrooms"><%= @property.bedrooms %></p>
+<h3>Bathrooms:</h3><p class="propertyBathrooms"><%= @property.bathrooms %></p>
 
-<h3>Price: <%=@property.price %></h3>
-<h3>Bedrooms: <%=@property.bedrooms %></h3>
-<h3>Bathrooms: <%=@property.bathrooms %></h3>
-<h3>Client: <%= @property.client ? (link_to @property.client.last_name_first_name, client_path(@property.client)) : "No associated client" %></h3>
+
+
 <%= link_to "Edit Property", edit_property_path %>
 <br>
 <br>
 <%= link_to "All Properties", properties_path %>
+<script type="text/javascript" charset="utf-8">
+
+  $(function () {
+    $(".js-next").on("click", function(e) {
+      e.preventDefault()
+      var nextId = parseInt($(".js-next").attr("data-id")) + 1;
+      console.log(`this is the nextId value ${nextId} `)
+      $.getJSON("/properties/" + nextId + ".json", function(data) {
+        console.log(data)
+        $(".propertyAddress").text(data["address"]);
+        $(".propertyPrice").text(data["price"]);
+        $(".propertyBedrooms").text(data["Bedrooms"]);
+        $(".propertyBathrooms").text(data["bathrooms"]);
+        $(".js-next").attr("data-id", data["id"]);
+      });
+    });
+  });
+  </script>

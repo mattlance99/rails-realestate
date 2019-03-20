@@ -43,15 +43,10 @@ $(function () {
               $('.content').html(clientLastName);
       }
       console.log(clientLastName)
-  //  $('.content').html(clientLastName);      //var clientLastName = data[1].last_name
-      //console.log(clientLastName)
-    //  $('.content').html(clientLastName);
     });
   });
 });
 </script>
-
-
 
 <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
   <input type=submit value='logout'>

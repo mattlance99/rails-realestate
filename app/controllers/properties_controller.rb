@@ -1,7 +1,7 @@
 class PropertiesController < ApplicationController
-before_action :set_property, only: [:show, :edit, :update]
+before_action :set_property, only: [:edit, :update]
 
-before_action :authorize_user!, only: [:show, :edit, :update]
+before_action :authorize_user!, only: [:edit, :update]
 
   def new
     if params[:agent_id] && !Agent.exists?(params[:agent_id])
@@ -24,9 +24,20 @@ before_action :authorize_user!, only: [:show, :edit, :update]
      end
   end
 
-
-
   def show
+    @properties = Agent.find(session[:user_id]).properties
+    @property = Property.find_by_id(params[:id])
+    if @property.nil?
+      redirect_to(controller: 'properties', action: 'index')
+    end
+    if session[:user_id] != @property.agent_id
+      redirect_to(controller: 'properties', action: 'index')
+    end
+    respond_to do |format|
+       format.html
+       format.json {render json: @property}
+     end
+
   end
 
   def create
