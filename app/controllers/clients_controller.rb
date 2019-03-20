@@ -10,6 +10,10 @@ class ClientsController < ApplicationController
   def index
     @agent = Agent.find(session[:user_id])
     @clients = @agent.clients
+    respond_to do |format|
+       format.html
+       format.json {render json: @clients}
+     end
   end
 
   def show

@@ -8,34 +8,51 @@
     <%=link_to 'See Your Properties', properties_path, id: 'propertyID' %>
     <br>
     <br>
-    <%=link_to 'See Clients', clients_path(@client)%>
+    <%=link_to 'See Clients', clients_path(@client), id: 'clientID' %>
     <br>
   </div>
   <div class="content">
-    <h1>Hello</h1>
-    <h1>Hello</h1>
-    <h1>Hello</h1>
-    <h1>Hello</h1>
-    <h1>Hello</h1>
-    <h1>Hello</h1>
-    <h1>Hello</h1>
-    <h1>Hello</h1>
+
   </div>
 <br>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  $('#propertyID').on('click', function(e) {
+    $('.content').html("")
+    e.preventDefault()
+    $.get("/properties" + ".json", function(data) {
+            console.log(data)
+      $('.content').html(data);
+    });
+  });
+});
+</script>
+
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  $('#clientID').on('click', function(e) {
+    $('.content').html("")
+    e.preventDefault()
+
+    $.get("/clients" + ".json", function(data) {
+      for (i = 0; i < data.length; i++) {
+        var clientLastName = data[i].last_name
+                console.log(clientLastName)
+              $('.content').html(clientLastName);
+      }
+      console.log(clientLastName)
+  //  $('.content').html(clientLastName);      //var clientLastName = data[1].last_name
+      //console.log(clientLastName)
+    //  $('.content').html(clientLastName);
+    });
+  });
+});
+</script>
+
+
+
 <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
   <input type=submit value='logout'>
 <% end %>
-
-<script>
-  console.log('hello')
-  $('#propertyID').on('click', function(e) {
-    e.preventDefault()
-    console.log('test')
-    $('.content').html("")
-    //1. Clear the current div of any content
-    //2. Make the Get request for the properties index
-    //3. Display the properties in the div you just cleared out
-    $('.content').html("<h3>New Stuff</h3>")
-  })
-</script>
