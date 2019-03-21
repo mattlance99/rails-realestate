@@ -12,6 +12,10 @@ class Agent < ApplicationRecord
       agent.password = SecureRandom.hex
     end
   end
+
+  def next_property(id)
+    self.properties.where('id > ?', id).first
+  end
 end
 
 

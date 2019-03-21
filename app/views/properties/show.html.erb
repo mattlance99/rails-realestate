@@ -1,9 +1,11 @@
 
-<a href="#" class="js-next" data-id="<%=@property.id%>">Next...</a>
-<h1 Address: class="propertyAddress"><%= @property.address %></h1>
-<h3>Price:</h3><p class="propertyPrice"><%= @property.price %></p>
-<h3>Bedrooms:</h3><p class="propertyBedrooms"><%= @property.bedrooms %></p>
-<h3>Bathrooms:</h3><p class="propertyBathrooms"><%= @property.bathrooms %></p>
+<div id="show-property">
+  <a href="#" class="js-next" data-id="<%=@property.id%>">Next...</a>
+  <h1 Address: class="propertyAddress"><%= @property.address %></h1>
+  <h3>Price:</h3><p class="propertyPrice"><%= @property.price %></p>
+  <h3>Bedrooms:</h3><p class="propertyBedrooms"><%= @property.bedrooms %></p>
+  <h3>Bathrooms:</h3><p class="propertyBathrooms"><%= @property.bathrooms %></p>
+</div>
 
 
 
@@ -14,18 +16,6 @@
 <script type="text/javascript" charset="utf-8">
 
   $(function () {
-    $(".js-next").on("click", function(e) {
-      e.preventDefault()
-      var nextId = parseInt($(".js-next").attr("data-id")) + 1;
-      console.log(`this is the nextId value ${nextId} `)
-      $.getJSON("/properties/" + nextId + ".json", function(data) {
-        console.log(data)
-        $(".propertyAddress").text(data["address"]);
-        $(".propertyPrice").text(data["price"]);
-        $(".propertyBedrooms").text(data["Bedrooms"]);
-        $(".propertyBathrooms").text(data["bathrooms"]);
-        $(".js-next").attr("data-id", data["id"]);
-      });
-    });
+
   });
   </script>

@@ -68,6 +68,17 @@ before_action :authorize_user!, only: [:edit, :update]
     redirect_to properties_url
   end
 
+  def next
+    @property = Property.find(params[:id])
+    @next_property = current_user.next_property(@property.id)
+    if @next_property
+      render json: @next_property
+    else
+      render json: current_user.properties.first
+    end
+
+  end
+
   private
 
   def property_params

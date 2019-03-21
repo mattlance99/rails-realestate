@@ -17,18 +17,6 @@
 <br>
 </div>
 
-<script type="text/javascript" charset="utf-8">
-$(function () {
-  $('#propertyID').on('click', function(e) {
-    $('.content').html("")
-    e.preventDefault()
-    $.get("/properties" + ".json", function(data) {
-            console.log(data)
-      $('.content').html(data);
-    });
-  });
-});
-</script>
 
 <script type="text/javascript" charset="utf-8">
 $(function () {
