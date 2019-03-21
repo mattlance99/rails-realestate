@@ -4,9 +4,8 @@ $(function () {
   $('#propertyID').on('click', function(e) {
     $('.content').html("")
     e.preventDefault()
-    $.get("/properties" + ".json", function(data) {
-            console.log(data)
-            data.forEach(function(property) {
+    $.get("/properties" + ".json", function(agent) {
+            agent.properties.forEach(function(property) {
               let myProperty = new Property(property)
               console.log(myProperty)
 

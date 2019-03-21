@@ -18,9 +18,10 @@ before_action :authorize_user!, only: [:edit, :update]
     elsif params[:date] == "This Month"
       @properties  = @properties.from_this_month
     end
+    @agent = Agent.find(session[:user_id])
     respond_to do |format|
-       format.html
-       format.json {render json: @properties}
+       format.html 
+       format.json {render json: @agent}
      end
   end
 
