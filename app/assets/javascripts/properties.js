@@ -5,13 +5,11 @@ $(function () {
     $('.content').html("")
     e.preventDefault()
     $.get("/properties" + ".json", function(agent) {
-            agent.properties.forEach(function(property) {
-              let myProperty = new Property(property)
-              console.log(myProperty)
-
-              $('.content').append(myProperty.formatIndex());
-            })
-
+        agent.properties.forEach(function(property) {
+        let myProperty = new Property(property)
+        console.log(myProperty)
+          $('.content').append(myProperty.formatIndex());
+        })
     });
   });
 
@@ -26,17 +24,9 @@ $(function () {
       $('#show-property').html('')
       let myProperty = new Property(data)
       $('#show-property').html(myProperty.formatShow())
-      // $(".propertyAddress").text(data["address"]);
-      // $(".propertyPrice").text(data["price"]);
-      // $(".propertyBedrooms").text(data["Bedrooms"]);
-      // $(".propertyBathrooms").text(data["bathrooms"]);
-      // $(".js-next").attr("data-id", data["id"]);
-      // var test = $(".js-next").attr("data-id", data["id"]);
     });
   });
 });
-
-
 
 class Property {
   constructor (obj){

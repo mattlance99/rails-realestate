@@ -26,13 +26,14 @@
   <%= f.label :bathrooms %>
   <%= f.text_field :bathrooms %>
   <br>
-  <%= f.collection_select :client_id, Client.all, :id, :last_name %>
+  <%= f.label :clients %>
+  <%= f.collection_select :client_id, Client.all, :id, :last_name, :include_blank => true%>
   <%= f.submit %>
 <% end %>
 
 <div id="postResult">
   <h2 id="propertyAddress"></h2>
-  <p id="propertyPrice"></p>
+  <p id="propertyPrice"> </p>
   <p id="propertyBedrooms"></p>
   <p id="propertyBathrooms"></p>
 </div>
@@ -47,7 +48,6 @@
 
       posting.done(function(data) {
         var property = data;
-        console.log(data)
         $("#propertyAddress").text(property["address"]);
         $("#propertyPrice").text(property["price"]);
         $("#propertyBedrooms").text(property["bedrooms"]);
